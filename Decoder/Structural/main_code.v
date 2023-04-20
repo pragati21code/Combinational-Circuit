@@ -1,34 +1,12 @@
 
-module decoder_beh(a0,a1,y0,y1,y2,y3);
+module decoder_struct(a0,a1,y0,y1,y2,y3);
 input a0,a1;
-output reg y0,y1,y2,y3;
-always@(*)
-begin
-case({a0,a1})
-(2'b00):begin
-y0=1;
-y1=0;
-y2=0;
-y3=0;
-end
-(2'b01):begin
-y0=0;
-y1=1;
-y2=0;
-y3=0;
-end
-(2'b10):begin
-y0=0;
-y1=0;
-y2=1;
-y3=0;
-end
-(2'b11):begin
-y0=0;
-y1=0;
-y2=0;
-y3=1;
-end
-endcase
-end
+output y0,y1,y2,y3;
+wire j,k;
+not(j,a0);
+not(k,a1);
+and(y0,j,k);
+and(y1,j,a1);
+and(y2,k,a0);
+and(y3,a0,a1);
 endmodule
